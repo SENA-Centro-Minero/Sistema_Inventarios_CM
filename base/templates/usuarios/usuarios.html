@@ -1,4 +1,40 @@
 {% extends 'partials/body.html' %}
 {% block contenido %}
     
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Tipo de Documento</th>
+        <th scope="col"># Documento</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">Rol</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+        
+        {% for usuario in usuarios %}
+        <tr>
+            <th scope="row">{{usuario.nombres}}</th>
+            <td>{{usuario.apellidos}}</td>
+            <td>{{usuario.tipoDocumento}}</td>
+            <td>{{usuario.documento}}</td>
+            <td>{{usuario.telefono}}</td>
+            <td>{{usuario.direccion}}</td>
+            <td>{{usuario.fecha_nacimiento}}</td>
+            <td>{{usuario.rol}}</td>
+
+
+          </tr> 
+        {% endfor %}
+            
+      
+      
+    </tbody>
+  </table>
 {% endblock contenido %}

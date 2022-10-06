@@ -2,6 +2,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from facturas.models import Sucursal
+
 
 # Create your models here.
 
@@ -28,17 +30,7 @@ class Municipio(models.Model):
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
 
-class Sucursal(models.Model):
-    nombre=models.TextField(max_length=80, verbose_name="Nombre Sucursal")
-    empresa=models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
-    direccion=models.CharField(max_length=70, verbose_name="Dirección")
-    telefono=models.CharField(max_length=20, verbose_name="Teléfono", blank=True)
-    administrador=models.ForeignKey("Usuario", on_delete=models.CASCADE, verbose_name="Administrador")
-    municipio=models.ForeignKey(Municipio, on_delete=models.CASCADE, verbose_name="Municipio")
-    class Estado(models.TextChoices):
-        ACTIVO='1', _('Activo')
-        INACTIVO='0', _('Inactivo')
-    estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
+
 
 class Usuario(models.Model):
     nombres=models.CharField(max_length=60, verbose_name="Nombres")
@@ -52,7 +44,7 @@ class Usuario(models.Model):
     documento=models.CharField(max_length=50, verbose_name="Número de Documento")
     telefono=models.CharField(max_length=20, verbose_name="Teléfono")
     direccion=models.CharField(max_length=70, verbose_name="Dirección")
-    municipio=models.ForeignKey(Municipio, on_delete=models.CASCADE, verbose_name="Municipio")
+    #municipio=models.ForeignKey(Municipio, on_delete=models.CASCADE, verbose_name="Municipio")
     fecha_nacimiento=models.DateField(verbose_name="Fecha de Nacimiento", help_text=u"MM/DD/AAAA")
     class Rol(models.TextChoices):
         Administrador='Administrador', _('Administrador')
@@ -60,8 +52,8 @@ class Usuario(models.Model):
         Cliente='Cliente', _('Cliente')
         Proveedor='Proveedor', _('Proveedor')
     rol=models.CharField(max_length=13, choices=Rol.choices, default=Rol.Empleado, verbose_name="Rol")
-    sucursal=models.ForeignKey("Sucursal", on_delete=models.CASCADE, verbose_name="Sucursal")
-    class Estado(models.Model):
+    #sucursal=models.ForeignKey(Sucursal, on_delete=models.CASCADE, verbose_name="Sucursal")
+    class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
