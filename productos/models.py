@@ -9,7 +9,7 @@ class Producto(models.Model):
     precio=models.PositiveBigIntegerField(validators=[MinValueValidator(1)], verbose_name="Precio")
     porcentaje_ganancia=models.DecimalField(validators=[MinValueValidator(0.0)], verbose_name="Porcentaje Ganancia")
     stock= models.PositiveIntegerField(validators=[MinValueValidator(0)], verbose_name="Stock")
-    class Estado(models.Model):
+    class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
@@ -17,7 +17,7 @@ class Producto(models.Model):
 class Categoria(models.Model):
     nombre=models.TextField(max_length=80, verbose_name="Nombre Categoria")
     descripcion=models.TextField(max_length=200, verbose_name="Descripción")
-    class Estado(models.Model):
+    class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
