@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 
 def inicioAdmin(request):
-    context={}
+    titulo="Tablero Principal"
+    context={
+        'titulo':titulo
+    }
     return render(request,'index-admin.html', context)
