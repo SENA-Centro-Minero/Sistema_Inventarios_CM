@@ -27,10 +27,24 @@
         {% include 'partials/navbar.html' %}
         {% include 'partials/sidebar.html' %}
 
-        {% include 'partials/main.html' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            {% include 'partials/header.html' %}
+            {% block contenido %}
+
+            {% endblock contenido %}
+        </div>
+        <!-- /.content-wrapper -->
+
 
         {% include 'partials/footer.html' %}
+        
     </div>
+    
+    {% block javascript %}
+        {% include 'partials/js.html' %}
+    {% endblock javascript %}
+        
 </body>
 
 </html>
