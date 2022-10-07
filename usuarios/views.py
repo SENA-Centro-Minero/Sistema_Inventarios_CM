@@ -29,3 +29,10 @@ def usuarios_crear(request):
         'form':form
     }
     return render(request,'usuarios/usuarios-crear.html',context)
+def empresas(request):
+    titulo="Empresas"
+
+    context={
+        'titulo':titulo
+    }
+    return render(request,'usuarios/empresas.html',context)

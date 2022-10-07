@@ -67,7 +67,7 @@
         </li>
         
         <li class="nav-item">
-          <a href="pages/mailbox/compose.html" class="nav-link">
+          <a href="{% url 'empresas' %}" class="nav-link">
             <i class="nav-icon fas fa-briefcase"></i>
             <p>Empresas</p>
           </a>
@@ -147,6 +147,19 @@
           <a href="pages/mailbox/compose.html" class="nav-link">
             <i class="nav-icon fas fa-code-branch"></i>
             <p>Categorías</p>
+          </a>
+        </li>
+        <li class="nav-header">EXTRAS</li>
+        <li class="nav-item">
+          <a href="{% url 'municipio' %}" class="nav-link">
+            <i class="nav-icon fas fa-map-signs"></i>
+            <p>Municipios</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'departamento' %}" class="nav-link">
+            <i class="nav-icon fas fa-road"></i>
+            <p>Departamentos</p>
           </a>
         </li>
       </ul>
