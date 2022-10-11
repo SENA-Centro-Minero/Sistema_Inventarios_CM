@@ -1,0 +1,53 @@
+{% extends 'partials/body.html' %}
+{% load static %}
+
+{% block contenido %}
+<section class="d-flex flex-column h-100 w-100 justify-content-between">
+    <section class="container pt-5">
+        <div class="row mt-3 w-100">
+            <div class="col">
+                <p class="text-justify">Somos un super equipo de instructores prestos a atender sus dudas e inquietudes.</p>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row mt-3">
+        </div>
+        <div class="row mt-3">
+            <div class="col text-center">
+                <img src="{% static 'img/users/ines.jpg' %}" class="bd-placeholder-img rounded-circle" widht="140" height="140">
+                <h2>Inés María Oliveros Hernández</h2>
+                <p>Desarrolladora</p>
+                <p>Celular: 3005793492</p>
+                <p>Email: inesmao@gmail.com</p>
+            </div>
+            <div class="col text-center">
+                <img src="{% static 'img/users/antony.jpg' %}" class="bd-placeholder-img rounded-circle" widht="140" height="140">
+                <h2>Antony Reynel Botello Herrera</h2>
+                <p>Desarrollador</p>
+                <p>Celular: 3135279210</p>
+                <p>Email: arbotello@sena.edu.co</p>
+            </div>
+            
+    </section>
+    <section>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center pt-3 mt-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+          <ul>
+            <ol>© 2022 MIBA</ol>
+            <ol>Desarrollado para ADSI Virtual</ol>
+            <ol>Ciclo 3 Misión TIC 2022</ol>
+          </ul>
+      </div>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul>
+    </footer>
+  </section>
+  </section>
+{% endblock contenido %}
+    

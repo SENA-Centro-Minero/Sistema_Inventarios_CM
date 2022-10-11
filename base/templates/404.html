@@ -1,0 +1,60 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+    <title>Sistema de Inventario - SENA</title>
+</head>
+
+<div class="content-wrapper" style="min-height: 1604.44px; margin-left:0;">
+
+    <section class="content-header">
+        
+    </section>
+
+    <section class="content">
+        <div class="error-page">
+            <h2 class="headline text-warning"> 404</h2>
+            <div class="error-content">
+                <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Página no encontrada.</h3>
+                <p>
+                    Nosotros no podemos encontrar la página que estas buscando.
+                    Meanwhile, puedes <a href="{% url 'inicio' %}">volver al tablero principal</a> o intentar usar el cuadro de búsqueda.
+                </p>
+                <form class="search-form">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar...">
+                        <div class="input-group-append">
+                            <button type="submit" name="submit" class="btn btn-warning"><i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+{% include 'partials/js.html' %}
+</body>
+
+</html>

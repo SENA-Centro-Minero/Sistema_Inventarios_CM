@@ -1,38 +1,27 @@
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
 from productos.models import Producto
-
 from usuarios.models import Usuario
 
 
-class Sucursal(models.Model):
-    nombre=models.TextField(max_length=80, verbose_name="Nombre Sucursal")
-    #empresa=models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
-    direccion=models.CharField(max_length=70, verbose_name="Dirección")
-    telefono=models.CharField(max_length=20, verbose_name="Teléfono", blank=True)
-    #administrador=models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Administrador")
-    #municipio=models.ForeignKey(Municipio, on_delete=models.CASCADE, verbose_name="Municipio")
-    class Estado(models.TextChoices):
-        ACTIVO='1', _('Activo')
-        INACTIVO='0', _('Inactivo')
-    estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
 
 # Create your models here.
 class Factura(models.Model):
     fecha=models.DateField(verbose_name="Fecha Factura", help_text=u"MM/DD/AAAA")
-    numeroSerie=models.TextField(max_length=80, verbose_name="Número de Serie")
-    monto=models.BigIntegerField(validators=[MinValueValidator(0)], verbose_name="Monto")
+    numeroSerie=models.TextField(max_length=80, verbose_name="Número de Serie",default=0)
+    monto=models.BigIntegerField(validators=[MinValueValidator(0)],default=0, verbose_name="Monto")
     class TipoFactura(models.TextChoices):
         VENTA='Venta', _('Venta')
         COMPRA='Compra', _('Compra')
-    tipoFactura=models.CharField(max_length=6, choices=TipoFactura.choices, default=TipoFactura.Venta, verbose_name="Tipo de Factura")
+    tipoFactura=models.CharField(max_length=6, choices=TipoFactura.choices, default=TipoFactura.VENTA, verbose_name="Tipo de Factura")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
-    usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
-    #empleado=models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Empleado")
+    cliente=models.ManyToManyField(Usuario,verbose_name="Cliente",related_name='Cliente')
+    empleado=models.ManyToManyField(Usuario,  verbose_name="Empleado",related_name='Empleado')
 
 class Detalle_Factura(models.Model):
     numeroFactura=models.ForeignKey(Factura, on_delete=models.CASCADE, verbose_name="Número Factura")

@@ -1,8 +1,10 @@
 from django.urls import path
-from usuarios.views import usuarios, usuarios_crear
+from usuarios.views import empresas, usuarios, usuarios_crear
 
 urlpatterns = [
-    path('',usuarios,name="usuarios"),
-    path('crear/',usuarios_crear,name="usuarios-crear"),
+    path('usuario/',usuarios,name="usuarios"),
+    path('usuario-crear/',usuarios_crear,name="usuarios-crear"),
+    path('empresa/',empresas,name="empresas"),
+
 
 ]

@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
+from base.views import contacto, departamento, error_404, inicio, inicioAdmin, municipio
 
-from base.views import inicioAdmin
-
+handler404= error_404
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',inicio,name='inicio'),
     path('adm/',inicioAdmin,name='inicio-admin'),
     path('usuarios/',include('usuarios.urls')),
+    path('extras/municipio',municipio,name='municipio'),
+    path('extras/departamento',departamento,name='departamento'),
+    path('contacto/',contacto,name="contacto")
+
 ]
