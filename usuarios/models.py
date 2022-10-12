@@ -9,30 +9,36 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Departamento(models.Model):
-    nombre=models.TextField(max_length=90, verbose_name="Nombre Departamento")
+    nombre=models.CharField(max_length=90, verbose_name="Nombre Departamento")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
 
+    def __str__(self)->str:
+        return "%s" %(self.nombre)
+
 class Municipio(models.Model):
-    nombre=models.TextField(max_length=90, verbose_name="Nombre Municipio")
+    nombre=models.CharField(max_length=90, verbose_name="Nombre Municipio")
     departamento=models.ForeignKey(Departamento, on_delete=models.CASCADE, verbose_name="Departamento")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
+    def __str__(self)->str:
+        return "%s - %s" %(self.nombre, self.departamento)
 
 class Empresa(models.Model):
-    nombre=models.TextField(max_length=80, verbose_name="Nombre Empresa")
+    nombre=models.CharField(max_length=80, verbose_name="Nombre Empresa")
     municipio=models.ForeignKey(Municipio, on_delete=models.CASCADE,null=True,blank=False, verbose_name="Municipio",related_name='usuarioMunicipio')
     
-    nit=models.TextField(max_length=20, verbose_name="NIT Empresa")
+    nit=models.CharField(max_length=20, verbose_name="NIT Empresa")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
-
+    def __str__(self)->str:
+        return "%s" %(self.nombre)   
 
 class Usuario(models.Model):
     nombres=models.CharField(max_length=60, verbose_name="Nombres")

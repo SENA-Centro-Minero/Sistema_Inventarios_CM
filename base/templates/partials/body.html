@@ -36,9 +36,11 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             {% include 'partials/header.html' %}
+            <div class="container">
             {% block contenido %}
 
             {% endblock contenido %}
+        </div>
         </div>
         <!-- /.content-wrapper -->
 
@@ -46,9 +48,9 @@
         {% include 'partials/footer.html' %}
         
     </div>
-    
+    {% include 'partials/js.html' %}
     {% block javascript %}
-        {% include 'partials/js.html' %}
+        
     {% endblock javascript %}
         
 </body>
