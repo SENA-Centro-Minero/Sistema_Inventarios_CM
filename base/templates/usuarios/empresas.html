@@ -1,7 +1,65 @@
 {% extends 'partials/body.html' %}
-
-
+{% load crispy_forms_tags %}
 {% block contenido %}
-    
+
+<div class="row my-4">
+    <div class="col-md-4">
+
+        <div class="border bg-white p-3">
+            <h4>Agregar Empresas</h4>
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success btn-block" type="submit" Value="Agregar Empresa">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Municipio</th>
+                    <th scope="col">Nit</th>
+
+
+                    <th scope="col">Acciones</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for empresa in empresas %}
+                <tr>
+
+                    {% if empresa.estado != '3' %}
+                    <td>{{empresa.nombre}}</td>
+                    <td>{{empresa.municipio}}</td>
+                    <td>{{empresa.nit}}</td>
+
+
+                    <td><a class="btn btn-primary" href="{% url 'empresas-editar' empresa.id  %}"><i
+                                class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" href="{% url 'empresas-eliminar' empresa.id  %}"><i
+                                class="fas fa-trash-alt"></i></a>
+                    </td>
+                    {% endif %}
+
+
+
+
+                </tr>
+                {% endfor %}
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 {% endblock contenido %}
-    
