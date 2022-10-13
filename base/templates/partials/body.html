@@ -11,11 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Font: Source Sans Pro -->
-    
+
     {% block stylesheet %}
-        
-    
-    {% endblock stylesheet %} 
+
+
+    {% endblock stylesheet %}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
-    
+      <!-- Toastr -->
+  <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/SenaLogo.png' %}">
     <title>Sistema de Inventario - SENA</title>
 </head>
 
@@ -37,22 +39,32 @@
         <div class="content-wrapper">
             {% include 'partials/header.html' %}
             <div class="container">
-            {% block contenido %}
+                {% block contenido %}
 
-            {% endblock contenido %}
-        </div>
+                {% endblock contenido %}
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <script type="text/javascript">
+                toastr.{ { message.tags } } ("{{ message }}");
+            </script>
+            {% endfor %}
+            {% endif %}
         </div>
         <!-- /.content-wrapper -->
 
 
         {% include 'partials/footer.html' %}
-        
+
     </div>
+
+
+
     {% include 'partials/js.html' %}
     {% block javascript %}
-        
+
     {% endblock javascript %}
-        
+
 </body>
 
 </html>

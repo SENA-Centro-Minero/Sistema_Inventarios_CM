@@ -38,7 +38,7 @@
 
                                 <td>{{departamento.nombre}}</td>
                                 <td><a class="btn btn-primary" href=""><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-danger" href=""><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-danger" href="{% url 'departamento_eliminar' departamento.id %}"><i class="fas fa-trash-alt"></i></a>
                                   </td>
 
                             </tr>
