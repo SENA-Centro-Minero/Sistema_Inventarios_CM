@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler404
-from base.views import contacto, departamento, error_404, inicio, inicioAdmin, municipio
+from base.views import contacto, departamento,departamento_eliminar, error_404, inicio, inicioAdmin, municipio
 
 handler404= error_404
 urlpatterns = [
@@ -26,6 +26,8 @@ urlpatterns = [
     path('usuarios/',include('usuarios.urls')),
     path('extras/municipio',municipio,name='municipio'),
     path('extras/departamento',departamento,name='departamento'),
+    path('extras/departamento/eliminar/<int:pk>/',departamento_eliminar,name='departamento_eliminar'),
+
     path('contacto/',contacto,name="contacto")
 
 ]

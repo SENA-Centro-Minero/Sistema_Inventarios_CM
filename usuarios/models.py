@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Departamento(models.Model):
-    nombre=models.CharField(max_length=90, verbose_name="Nombre Departamento")
+    nombre=models.CharField(max_length=90,unique=True, verbose_name="Nombre Departamento")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
@@ -19,7 +19,7 @@ class Departamento(models.Model):
         return "%s" %(self.nombre)
 
 class Municipio(models.Model):
-    nombre=models.CharField(max_length=90, verbose_name="Nombre Municipio")
+    nombre=models.CharField(max_length=90,unique=True, verbose_name="Nombre Municipio")
     departamento=models.ForeignKey(Departamento, on_delete=models.CASCADE, verbose_name="Departamento")
     class Estado(models.TextChoices):
         ACTIVO='1', _('Activo')
