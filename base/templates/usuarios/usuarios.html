@@ -4,6 +4,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th class="col text-center">Foto</th>
       <th scope="col">Nombres</th>
       <th scope="col">Apellidos</th>
       <th scope="col">Tipo de Documento</th>
@@ -28,6 +29,7 @@
     <tr>
 
       {% if usuario.estado != '3' %}
+      <td class="align middle text-center"><img class="rounded-circle" src="{{ MEDIA_URL }}{{usuario.foto.url}}" alt="" width="50" height="50"></td>
       <td >{{usuario.nombres}}</td>
       <td>{{usuario.apellidos}}</td>
       <td>{{usuario.tipoDocumento}}</td>

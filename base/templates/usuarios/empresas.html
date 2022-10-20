@@ -11,55 +11,62 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <input class="btn btn-success btn-block" type="submit" Value="Agregar Empresa">
+                <input type="hidden" name="modal-status" id="modal-status" value="{{modal_status}}">
+                <button class="btn btn-success btn-block" name="form-crear">Agregar Empresa</button>
             </form>
         </div>
     </div>
     <div class="col-md-8">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nombres</th>
-                    <th scope="col">Municipio</th>
-                    <th scope="col">Nit</th>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Gestiona tus empresas</h3>
+            </div>
 
+            <div class="card-body">
+                <table id="tabla-general" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Municipio</th>
+                            <th>Nit</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empresa in empresas %}
+                        <tr>
+                            <td>{{empresa.nombre}}</td>
+                            <td>{{empresa.municipio}}</td>
+                            <td>{{empresa.nit}}</td>
+                            <td>
+                                <div class="row">
+                                    <form action="" method="POST" class="col-4">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pk" value="{{empresa.id}}">
+                                        <button class="btn btn-primary btn-block" name="form-editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </form>
+                                    <form action="" method="POST" class="col-4">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pk" value="{{empresa.id}}">
+                                        <button class="btn btn-danger btn-block" name="form-eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
 
-                    <th scope="col">Acciones</th>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for empresa in empresas %}
-                <tr>
-
-                    {% if empresa.estado != '3' %}
-                    <td>{{empresa.nombre}}</td>
-                    <td>{{empresa.municipio}}</td>
-                    <td>{{empresa.nit}}</td>
-
-
-                    <td><a class="btn btn-primary" href="{% url 'empresas-editar' empresa.id  %}"><i
-                                class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" href="{% url 'empresas-eliminar' empresa.id  %}"><i
-                                class="fas fa-trash-alt"></i></a>
-                    </td>
-                    {% endif %}
-
-
-
-
-                </tr>
-                {% endfor %}
-
-
-
-            </tbody>
-        </table>
     </div>
 </div>
+
 
 
 {% endblock contenido %}

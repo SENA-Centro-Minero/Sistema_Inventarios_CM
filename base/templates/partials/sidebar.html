@@ -92,31 +92,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-industry"></i>
-            <p>
-              Sucursales
-              <i class="fas fa-angle-left right"></i>
-
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{% url 'usuarios' %}" class="nav-link">
-                <i class="nav-icon fas fa-building"></i>
-                <p>Ver Sucursales</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/mailbox/compose.html" class="nav-link">
-                <i class="nav-icon fas fa-hospital"></i>
-                <p>Crear Sucursal</p>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
+        
         <li class="nav-header">PRODUCTOS</li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -129,13 +105,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{% url 'usuarios' %}" class="nav-link">
+              <a href="{% url 'productos' %}" class="nav-link">
                 <i class="nav-icon fas fa-box-open"></i>
                 <p>Ver Productos</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/mailbox/compose.html" class="nav-link">
+              <a href="{% url 'productos-crear' %}" class="nav-link">
                 <i class="nav-icon fas fa-parachute-box"></i>
                 <p>Crear Producto</p>
               </a>

@@ -22,9 +22,9 @@ class Municipio(models.Model):
     nombre=models.CharField(max_length=90,unique=True, verbose_name="Nombre Municipio")
     departamento=models.ForeignKey(Departamento, on_delete=models.CASCADE, verbose_name="Departamento")
     class Estado(models.TextChoices):
-        ACTIVO='1', _('Activo')
-        INACTIVO='0', _('Inactivo')
-    estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
+        ACTIVO= True, _('Activo')
+        INACTIVO= False, _('Inactivo')
+    estado=models.BooleanField(max_length=5, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
     def __str__(self)->str:
         return "%s - %s" %(self.nombre, self.departamento)
 
@@ -43,6 +43,7 @@ class Empresa(models.Model):
 class Usuario(models.Model):
     nombres=models.CharField(max_length=60, verbose_name="Nombres")
     apellidos=models.CharField(max_length=60, verbose_name="Apellidos")
+    foto=models.ImageField(upload_to='images/usuarios',blank=True, default='images/usuarios/default.png')
     class TipoDocumento(models.TextChoices):
         CC='C.C', _('Cédula de Ciudadanía')
         CE='C.E', _('Cédula de Extranjería')
@@ -66,3 +67,5 @@ class Usuario(models.Model):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
+    def __str__(self)->str:
+        return "%s %s" %(self.nombres, self.apellidos)   

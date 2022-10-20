@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 class Producto(models.Model):
-    nombre=models.TextField(max_length=60, verbose_name="Nombre Producto")
+    nombre=models.CharField(max_length=60, verbose_name="Nombre Producto")
     precio=models.PositiveBigIntegerField(validators=[MinValueValidator(1)], verbose_name="Precio")
     porcentaje_ganancia=models.DecimalField(validators=[MinValueValidator(0.0)],decimal_places=1,max_digits=2, verbose_name="Porcentaje Ganancia")
     stock= models.PositiveIntegerField(validators=[MinValueValidator(0)], verbose_name="Stock")

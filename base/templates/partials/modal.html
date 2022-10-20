@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+
+<div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="mainModalLabel">{{ modal_title }}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="mb-0" method="POST">
+                    
+                    {% if tipo == 'eliminar' %}
+                    <p class="pb-4">¿Esta seguro de {{ modal_txt }}?</p>
+                    {% else %}
+                    {{form_update|crispy}}
+
+                    {% endif %}
+                        
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="{{tipo}}">
+                    <input type="hidden" name="modal-pk" value="{{pk}}">
+                    <div class="modal-footer pt-3">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button name="modal-confirmar" class="btn btn-success">{{ modal_submit }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->

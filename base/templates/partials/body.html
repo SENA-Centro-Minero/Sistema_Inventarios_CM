@@ -42,22 +42,18 @@
                 {% block contenido %}
 
                 {% endblock contenido %}
+                {% include 'partials/modal.html' %}
+
             </div>
-            {% if messages %}
-            {% for message in messages %}
-            <script type="text/javascript">
-                toastr.{ { message.tags } } ("{{ message }}");
-            </script>
-            {% endfor %}
-            {% endif %}
+            {% include 'partials/toastr.html' %}
         </div>
         <!-- /.content-wrapper -->
 
 
-        {% include 'partials/footer.html' %}
+      
 
     </div>
-
+    {% include 'partials/footer.html' %}
 
 
     {% include 'partials/js.html' %}

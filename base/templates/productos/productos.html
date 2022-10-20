@@ -4,17 +4,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nombres</th>
-      <th scope="col">Apellidos</th>
-      <th scope="col">Tipo de Documento</th>
-      <th scope="col"># Documento</th>
-      <th scope="col">Municipio</th>
-      <th scope="col">Empresa</th>
-      <th scope="col">Teléfono</th>
-      <th scope="col">Dirección</th>
-      <th scope="col">Fecha de Nacimiento</th>
-      <th scope="col">Rol</th>
-      <th scope="col">Estado</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Porcentaje Ganancia</th>
+      <th scope="col">Stock</th>
 
       <th scope="col">Acciones</th>
 
@@ -24,24 +17,16 @@
   </thead>
   <tbody>
 
-    {% for usuario in usuarios %}
+    {% for producto in productos %}
     <tr>
 
-      {% if usuario.estado != '3' %}
-      <td >{{usuario.nombres}}</td>
-      <td>{{usuario.apellidos}}</td>
-      <td>{{usuario.tipoDocumento}}</td>
-      <td>{{usuario.documento}}</td>
-      <td>{{usuario.municipio}}</td>
-      <td>{{usuario.empresa}}</td>
-      <td>{{usuario.telefono}}</td>
-      <td>{{usuario.direccion}}</td>
-      <td>{{usuario.fecha_nacimiento}}</td>
-      <td>{{usuario.rol}}</td>
-      <td>{{usuario.estado}}</td>
-
-      <td><a class="btn btn-primary" href="{% url 'usuarios-editar' usuario.id  %}"><i class="fas fa-edit"></i></a>
-        <a class="btn btn-danger" href="{% url 'usuarios-eliminar' usuario.id  %}"><i class="fas fa-trash-alt"></i></a>
+      {% if producto.estado != '3' %}
+      <td >{{producto.nombre}}</td>
+      <td>{{producto.precio}}</td>
+      <td>{{producto.porcentaje_ganancia}}</td>
+      <td>{{producto.stock}}</td>
+      <td><a class="btn btn-primary" href="{% url 'productos-editar' producto.id  %}"><i class="fas fa-edit"></i></a>
+        <a class="btn btn-danger" href="{% url 'productos-eliminar' producto.id  %}"><i class="fas fa-trash-alt"></i></a>
       </td>
       {% endif %}
 

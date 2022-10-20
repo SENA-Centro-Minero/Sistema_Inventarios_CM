@@ -18,16 +18,27 @@ from django.urls import path, include
 from django.conf.urls import handler404
 from base.views import contacto, departamento,departamento_eliminar, error_404, inicio, inicioAdmin, municipio
 
+
+####### Importes para subir imágenes #######
+from django.conf import settings
+from django.conf.urls.static import static
+############################################
+
 handler404= error_404
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',inicio,name='inicio'),
     path('adm/',inicioAdmin,name='inicio-admin'),
     path('usuarios/',include('usuarios.urls')),
+    
+    path('productos/',include('productos.urls')),
+    path('facturas/',include('facturas.urls')),
+
+
     path('extras/municipio',municipio,name='municipio'),
     path('extras/departamento',departamento,name='departamento'),
     path('extras/departamento/eliminar/<int:pk>/',departamento_eliminar,name='departamento_eliminar'),
 
     path('contacto/',contacto,name="contacto")
 
-]
+]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

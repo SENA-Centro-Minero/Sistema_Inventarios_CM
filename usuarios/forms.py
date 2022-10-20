@@ -10,6 +10,10 @@ class EmpresaForm(ModelForm):
     class Meta:
         model= Empresa
         exclude=['estado']
+class EmpresaUpdateForm(ModelForm):
+    class Meta:
+        model= Empresa
+        exclude=['estado','nit']
 class DepartamentoForm(ModelForm):
     class Meta:
         model= Departamento
