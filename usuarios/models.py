@@ -1,7 +1,7 @@
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.contrib.auth.models import User
 
 
 
@@ -44,6 +44,8 @@ class Usuario(models.Model):
     nombres=models.CharField(max_length=60, verbose_name="Nombres")
     apellidos=models.CharField(max_length=60, verbose_name="Apellidos")
     foto=models.ImageField(upload_to='images/usuarios',blank=True, default='images/usuarios/default.png')
+    email= models.EmailField(max_length=150, verbose_name='Correo')
+
     class TipoDocumento(models.TextChoices):
         CC='C.C', _('Cédula de Ciudadanía')
         CE='C.E', _('Cédula de Extranjería')
@@ -67,5 +69,7 @@ class Usuario(models.Model):
         ACTIVO='1', _('Activo')
         INACTIVO='0', _('Inactivo')
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
+    user=models.ForeignKey(User, on_delete= models.CASCADE)
+
     def __str__(self)->str:
         return "%s %s" %(self.nombres, self.apellidos)   

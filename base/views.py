@@ -3,11 +3,7 @@ from django.views.defaults import page_not_found
 from usuarios.models import Municipio, Departamento
 from usuarios.forms import DepartamentoForm,MunicipioForm
 from django.contrib import messages
-def inicio(request):
-    
-    context={
-    }
-    return render(request,'login.html', context)
+from django.contrib.auth import logout
 
 def inicioAdmin(request):
     titulo="Tablero Principal"
@@ -85,3 +81,14 @@ def error_404(request,exception):
 def contacto(request):
     context={}
     return render(request,'contacto.html',context)
+
+def loggedIn(request):
+    if request.user.is_authenticated:
+        respuesta:"Ingresado como "+ request.user.username
+    else:
+        respuesta:"No estas autenticado."
+    return HttpResponse(respuesta)
+
+def logout_user(request):
+    logout(request)
+    return redirect('inicio')

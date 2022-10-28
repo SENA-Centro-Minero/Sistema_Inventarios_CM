@@ -31,12 +31,12 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    <div class="wrapper ">
         {% include 'partials/navbar.html' %}
         {% include 'partials/sidebar.html' %}
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper overflow-auto" style="height: 80%;">
             {% include 'partials/header.html' %}
             <div class="container">
                 {% block contenido %}

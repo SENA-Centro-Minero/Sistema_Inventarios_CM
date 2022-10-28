@@ -14,7 +14,7 @@ urlpatterns = [
    
 
 
-    path('empresa/',empresas,name="empresas"),
+    
 
 
 ]

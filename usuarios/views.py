@@ -5,7 +5,12 @@ from usuarios.models import Usuario,Empresa
 
 from django.contrib import messages
 
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+from usuarios.models import Departamento,Municipio
 # Create your views here.
+@login_required(login_url='inicio')
 def usuarios(request):
     titulo="Usuarios"
     usuarios= Usuario.objects.all()
@@ -18,12 +23,37 @@ def usuarios(request):
 def usuarios_crear(request):
     titulo="Usuarios - Crear"
     if request.method == "POST":
-        form= UsuarioForm(request.POST)
+        form= UsuarioForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            if not User.objects.filter(username=request.POST['documento']):
+                user = User.objects.create_user('nombre','email@email','pass')
+                user.username= request.POST['documento']
+                user.first_name= request.POST['nombres']
+                user.last_name= request.POST['apellidos']
+                user.email= request.POST['email']
+                user.password= "@"+request.POST['documento']
+                user.save()
+            else:
+                user=User.objects.get(username=request.POST['documento'])
+
+            usuario= Usuario.objects.create(
+                nombres=request.POST['nombres'],
+                apellidos=request.POST['apellidos'],
+                foto=form.cleaned_data.get('foto'),
+                email=request.POST['email'],
+                tipoDocumento=request.POST['tipoDocumento'],
+                documento=request.POST['documento'],
+                telefono=request.POST['telefono'],
+                direccion=request.POST['direccion'],
+                municipio=Municipio.objects.get(id=int(request.POST['municipio'])),
+                fecha_nacimiento=request.POST['fecha_nacimiento'],
+                empresa=Empresa.objects.get(id=int(request.POST['empresa'])),
+                user=user,
+                rol=request.POST['rol'],
+            )
             return redirect('usuarios')
         else:
-            print("Error")
+            form = UsuarioForm(request.POST,request.FILES)
     else:
         form= UsuarioForm()
     context={
@@ -31,6 +61,7 @@ def usuarios_crear(request):
         'form':form
     }
     return render(request,'partials/crear.html',context)
+
 def usuarios_editar(request, pk):
     titulo="Usuarios - Editar"
     usuario= Usuario.objects.get(id=pk)

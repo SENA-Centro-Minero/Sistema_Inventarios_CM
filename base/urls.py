@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler404
-from base.views import contacto, departamento,departamento_eliminar, error_404, inicio, inicioAdmin, municipio
+from base.views import contacto, departamento,departamento_eliminar, error_404, inicioAdmin, municipio
 
+from base.views import loggedIn,logout_user
+from django.contrib.auth.views import LoginView as login
 
 ####### Importes para subir imágenes #######
 from django.conf import settings
@@ -27,7 +29,7 @@ from django.conf.urls.static import static
 handler404= error_404
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',inicio,name='inicio'),
+    path('',login.as_view(),name='inicio'),
     path('adm/',inicioAdmin,name='inicio-admin'),
     path('usuarios/',include('usuarios.urls')),
     
@@ -39,6 +41,10 @@ urlpatterns = [
     path('extras/departamento',departamento,name='departamento'),
     path('extras/departamento/eliminar/<int:pk>/',departamento_eliminar,name='departamento_eliminar'),
 
-    path('contacto/',contacto,name="contacto")
+    path('contacto/',contacto,name="contacto"),
+
+    path('loggedin/',loggedIn,name="inicio-sesion"),
+    path('logout/',logout_user,name="logout"),
+
 
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
