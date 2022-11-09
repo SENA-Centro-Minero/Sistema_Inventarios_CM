@@ -2,7 +2,6 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% bootstrap_messages %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +20,12 @@
     <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
     <title>Sistema de Inventario - SENA</title>
 </head>
+<style>
+    input,
+    select {
+        width: 85%
+    }
+</style>
 
 <body class="login-page" style="min-height: 466px;">
     <div class="login-box">
@@ -65,18 +70,16 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
-                            <input type="submit" class="btn btn-primary btn-block" value="Ingresar">
-                        </div>
+                        <input type="submit" class="btn btn-primary btn-block" value="Ingresar">
 
                     </div>
                 </form>
-               
+
 
                 <p class="mb-1">
                     <a href="forgot-password.html">Olvidé mi contraseña</a>
                 </p>
-                
+
             </div>
 
         </div>

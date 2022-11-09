@@ -1,0 +1,80 @@
+{% extends 'partials/body.html' %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="row my-4">
+
+    <div class="col-md-4">
+
+        <div class="border bg-white p-3">
+            <h4>Agregar Producto</h4>
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-success btn-block" name="agregar-producto">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Agrega productos a tu factura</h3>
+            </div>
+
+            <div class="card-body">
+                <table id="tabla-general" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>producto</th>
+                            <th>cantidad</th>
+                            <th>precio unitario</th>
+                            <th>subtotal</th>
+                            <th>lote</th>
+                            <th>Expira en</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for compra in compras %}
+                        <tr>
+                            <td>{{compra.producto}}</td>
+                            <td>{{compra.cantidad}}</td>
+                            <td>{{compra.producto.precio}}</td>
+                            <td>{{compra.subtotal}}</td>
+                            <td>{{compra.lote}}</td>
+                            <td>{{compra.fechaExpiracion}}</td>
+
+
+
+                            <td>
+
+                                
+                                
+
+                                    <form action="" method="POST" class="col-8">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="compra-p-id" value="{{compra.id}}">
+                                        <button class="btn btn-danger col" name="eliminar-producto">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+
+                                
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    {% endblock contenido %}
+
+    {% block javascript %}
+    {{ form.media.js }}
+    {% endblock javascript %}

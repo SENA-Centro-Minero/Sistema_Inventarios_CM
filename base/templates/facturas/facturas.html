@@ -1,0 +1,88 @@
+{% extends 'partials/body.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="row my-4">
+    <div class="col-md-4">
+
+        <div class="border bg-white p-3">
+            <h4>Agregar Facturas</h4>
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="hidden" name="modal-status" id="modal-status" value="{{modal_status}}">
+                <button class="btn btn-success btn-block" name="form-crear">Agregar Factura</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card p-3">
+            <div class="card-header">
+                <h3 class="card-title">Gestiona tus facturas</h3>
+            </div>
+
+            <div class="card-body">
+                <table id="tabla-general" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Tipo de Factura</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for factura in facturas %}
+                        <tr>
+                            <td>{{factura.numeroSerie}}</td>
+                            <td>{{factura.monto}}</td>
+                            <td>{{factura.fecha}}</td>
+                            <td>{{factura.tipoFactura}}</td>
+                            <td>{{factura.cliente}}</td>
+                            <td>{{factura.empleado}}</td>
+
+
+
+                            <td>
+                                <div class="row">
+                                    {% csrf_token %}
+
+                                    {% if factura.tipoFactura == 'Venta' %}
+                                    <a href="url 'f-d-venta' factura.numeroSerie" class="btn btn-primary col">
+                                        <i class="fas fa-edit "></i>
+                                    </a>
+                                    {% else %}
+                                    <a href="{% url 'f-d-compra' factura.numeroSerie %}" class="btn btn-primary col">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="pk" value="{{factura.id}}">
+                                    <button class="btn btn-danger btn-block col" name="form-eliminar">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock contenido %}

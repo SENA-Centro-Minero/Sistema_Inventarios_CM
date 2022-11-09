@@ -3,33 +3,29 @@
 <script src="{% static 'jquery/jquery.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'js/adminlte.js' %}"></script>
-<!-- <script type="application/json" src="{% static 'toastr/toast.js.map' %}"></script> -->
-<!-- Toastr -->
-<script src="{% static 'toastr/toastr.min.js' %}"></script>
+<!-- Toast -->
+<script src="{% static 'js/jquery.toast.js' %}"></script>
 
-<script type="application/json" src="{% static 'toastr/toastr-options.js' %}"></script>
-<script>
-    toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": true,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }
-</script>
+
+<!-- DataTables  & Plugins -->
+<script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'jszip/jszip.min.js' %}"></script>
+<script src="{% static 'pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 <script>
   $(function () {
       $("#tabla-general").DataTable({
+        language:{
+          url: "{% static 'datatables/datatables.spanish.json' %}"
+        },
           "responsive": true, "lengthChange": false, "autoWidth": true,"ordering": true,
           "searching": true, "info": true,
           "buttons": ["copy", "csv", "excel", "pdf", "print"]

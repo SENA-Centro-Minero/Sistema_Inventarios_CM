@@ -82,12 +82,12 @@ def contacto(request):
     context={}
     return render(request,'contacto.html',context)
 
-def loggedIn(request):
-    if request.user.is_authenticated:
-        respuesta:"Ingresado como "+ request.user.username
-    else:
-        respuesta:"No estas autenticado."
-    return HttpResponse(respuesta)
+# def loggedIn(request):
+#     if request.user.is_authenticated:
+#         respuesta:"Ingresado como "+ request.user.username
+#     else:
+#         respuesta:"No estas autenticado."
+#     return HttpResponse(respuesta)
 
 def logout_user(request):
     logout(request)

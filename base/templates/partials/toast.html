@@ -1,0 +1,42 @@
+{% load static %}
+{% for message in messages %}
+<script src="{% static 'jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.toast.js' %}"></script>
+{% if message.tags == 'success' %}
+<script>
+   var mytoast= $.toast({
+    heading: 'Éxito!',
+    text: '{{ message }}',
+    showHideTransition: 'slide',
+    icon: 'success',
+    position: 'bottom-right',
+    hideAfter: "5000",
+});
+</script>
+{% endif %}
+{% if message.tags == 'error' %}
+<script>
+   var mytoast= $.toast({
+    heading: 'Error!',
+    text: '{{ message }}',
+    showHideTransition: 'slide',
+    icon: 'error',
+    position: 'bottom-right',
+    hideAfter: "5000",
+});
+</script>
+{% endif %}
+
+{% if message.tags == 'warning' %}
+<script>
+  var mytoast = $.toast({
+    heading: "Advertencia!",
+    text: "{{ message }}",
+    showHideTransition: "slide",
+    icon: "warning",
+    position: "bottom-right",
+    hideAfter: "5000",
+  });
+</script>
+{% endif %}
+{% endfor %}

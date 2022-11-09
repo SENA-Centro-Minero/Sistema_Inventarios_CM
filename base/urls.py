@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf.urls import handler404
 from base.views import contacto, departamento,departamento_eliminar, error_404, inicioAdmin, municipio
 
-from base.views import loggedIn,logout_user
+from base.views import logout_user
 from django.contrib.auth.views import LoginView as login
 
 ####### Importes para subir imágenes #######
@@ -43,8 +43,9 @@ urlpatterns = [
 
     path('contacto/',contacto,name="contacto"),
 
-    path('loggedin/',loggedIn,name="inicio-sesion"),
+    # path('loggedin/',loggedIn,name="inicio-sesion"),
     path('logout/',logout_user,name="logout"),
 
+    path("select2/", include("django_select2.urls")),
 
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

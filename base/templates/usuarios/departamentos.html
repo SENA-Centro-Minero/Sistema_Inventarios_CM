@@ -2,66 +2,52 @@
 {% load static %}
 
 {% block stylesheet %}
-<!-- DataTables -->
-<!-- <link rel="stylesheet" href="{% static 'datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="{% static 'datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="{% static 'datatables-buttons/css/buttons.bootstrap4.min.css"> -->
+
 {% endblock stylesheet %}
 
 
 {% block contenido %}
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Gestiona tus departamentos</h3>
-    </div>
+<div class="col-md-12">
+    <div class="card p-3">
+        <div class="card-header">
+            <h3 class="card-title">Gestiona tus departamentos</h3>
+        </div>
 
-    <div class="card-body">
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="card-body">
+            <table id="tabla-general" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for departamento in departamentos %}
+                    <tr>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
-                        aria-describedby="example1_info">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <td>{{departamento.nombre}}</td>
+                        <td><a class="btn btn-primary" href=""><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" href="{% url 'departamento_eliminar' departamento.id %}"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </td>
 
-                            {% for departamento in departamentos %}
+                    </tr>
+                    {% endfor %}
 
+                    <tr class="">
+                        <form action="" method='POST'>
+                            {% csrf_token %}
+                            <td>
+                                <input type="text" name="nombre" maxlength="90" required="" id="id_nombre">
+                            </td>
 
-
-                            <tr class="odd">
-
-                                <td>{{departamento.nombre}}</td>
-                                <td><a class="btn btn-primary" href=""><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-danger" href="{% url 'departamento_eliminar' departamento.id %}"><i class="fas fa-trash-alt"></i></a>
-                                  </td>
-
-                            </tr>
-                            {% endfor %}
-
-                            <tr class="">
-                                <form action="" method='POST'>
-                                    {% csrf_token %}
-                                    <td class="sorting_1 dtr-control" tabindex="0" style="">
-                                        <input type="text" name="nombre" maxlength="90" required="" id="id_nombre">
-                                    </td>
-                                    
-                                    <td><input class="btn btn-success" type="submit" value="Agregar"></td>
-                                </form>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
+                            <td><input class="btn btn-success col-md-2" type="submit" value="Agregar"></td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
 </div>
 {% endblock contenido %}
 
@@ -79,22 +65,5 @@
 <script src="{% static 'datatables-buttons/js/buttons.html5.min.js' %}"></script>
 <script src="{% static 'datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'datatables-buttons/js/buttons.colVis.min.js' %}"></script>
-<!-- Page specific script -->
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
+
 {% endblock javascript %}

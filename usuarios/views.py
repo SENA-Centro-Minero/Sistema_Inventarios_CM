@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.hashers import make_password
 from usuarios.models import Departamento,Municipio
 # Create your views here.
 @login_required(login_url='inicio')
@@ -31,7 +31,7 @@ def usuarios_crear(request):
                 user.first_name= request.POST['nombres']
                 user.last_name= request.POST['apellidos']
                 user.email= request.POST['email']
-                user.password= "@"+request.POST['documento']
+                user.password=make_password("@" + request.POST['nombres'][0] + request.POST['apellidos'][0] + request.POST['documento'][-4:])
                 user.save()
             else:
                 user=User.objects.get(username=request.POST['documento'])
