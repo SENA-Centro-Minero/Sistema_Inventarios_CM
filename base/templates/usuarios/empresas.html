@@ -3,6 +3,10 @@
 {% block contenido %}
 
 <div class="row my-4">
+
+    {% if perms.usuarios.add_empresa %}
+
+
     <div class="col-md-4">
 
         <div class="border bg-white p-3">
@@ -16,6 +20,8 @@
             </form>
         </div>
     </div>
+    {% endif %}
+
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
@@ -29,7 +35,10 @@
                             <th>Nombres</th>
                             <th>Municipio</th>
                             <th>Nit</th>
+
+                            {% if perms.usuarios.delete_empresa or perms.usuarios.change_empresa %}
                             <th>Acciones</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +47,15 @@
                             <td>{{empresa.nombre}}</td>
                             <td>{{empresa.municipio}}</td>
                             <td>{{empresa.nit}}</td>
+
+                            {% if perms.usuarios.delete_empresa or perms.usuarios.change_empresa %}
+
+
+
                             <td>
                                 <div class="row">
+
+                                    {% if perms.usuarios.change_empresa %}
                                     <form action="" method="POST" class="col-4">
                                         {% csrf_token %}
                                         <input type="hidden" name="pk" value="{{empresa.id}}">
@@ -47,6 +63,10 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </form>
+                                    {% endif %}
+
+                                    {% if perms.usuarios.delete_empresa %}
+
                                     <form action="" method="POST" class="col-4">
                                         {% csrf_token %}
                                         <input type="hidden" name="pk" value="{{empresa.id}}">
@@ -54,9 +74,11 @@
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
+                                    {% endif %}
 
                                 </div>
                             </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
