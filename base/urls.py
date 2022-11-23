@@ -19,7 +19,7 @@ from django.conf.urls import handler404
 from base.views import contacto, departamento,departamento_eliminar, error_404, inicioAdmin, municipio
 
 from base.views import logout_user
-from django.contrib.auth.views import LoginView as login
+from django.contrib.auth import views as auth_views
 
 ####### Importes para subir imágenes #######
 from django.conf import settings
@@ -29,7 +29,6 @@ from django.conf.urls.static import static
 handler404= error_404
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',login.as_view(),name='inicio'),
     path('adm/',inicioAdmin,name='inicio-admin'),
     path('usuarios/',include('usuarios.urls')),
     
@@ -43,8 +42,15 @@ urlpatterns = [
 
     path('contacto/',contacto,name="contacto"),
 
-    # path('loggedin/',loggedIn,name="inicio-sesion"),
+    
     path('logout/',logout_user,name="logout"),
+    path('',auth_views.LoginView.as_view(),name='inicio'),
+    path('reiniciar/',auth_views.PasswordResetView.as_view(),name='pass_reset'),
+    path('reiniciar/enviar',auth_views.PasswordResetDoneView.as_view(),name='pass_reset_done'),
+    path('reiniciar/<uid64>/<token>',auth_views.PasswordResetConfirmView.as_view(),name='pass_reset_confirm'),
+    path('reiniciar/completo',auth_views.PasswordResetCompleteView.as_view(),name='pass_reset_reset_complete'),
+    path('', include('django.contrib.auth.urls')),
+
 
     path("select2/", include("django_select2.urls")),
 

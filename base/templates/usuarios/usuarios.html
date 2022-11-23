@@ -16,7 +16,7 @@
       <th scope="col">Fecha de Nacimiento</th>
       <th scope="col">Rol</th>
       <th scope="col">Estado</th>
-
+      <th scope="col">Grupo</th>
       <th scope="col">Acciones</th>
 
 
@@ -41,6 +41,8 @@
       <td>{{usuario.fecha_nacimiento}}</td>
       <td>{{usuario.rol}}</td>
       <td>{{usuario.estado}}</td>
+      <td>{{usuario.user.groups.all.0}}</td>
+      
 
       <td><a class="btn btn-primary" href="{% url 'usuarios-editar' usuario.id  %}"><i class="fas fa-edit"></i></a>
         <a class="btn btn-danger" href="{% url 'usuarios-eliminar' usuario.id  %}"><i class="fas fa-trash-alt"></i></a>

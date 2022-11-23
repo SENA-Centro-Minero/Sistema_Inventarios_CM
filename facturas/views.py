@@ -1,10 +1,17 @@
 from django.shortcuts import render,redirect
-from facturas.models import Factura
-from facturas.forms import FacturaForm, FacturaDetalleCompraForm,FacturaDetalleVentaForm
+from facturas.models import Factura,Devolucion
+from facturas.forms import FacturaForm, FacturaDetalleCompraForm,FacturaDetalleVentaForm,DevolucionForm
 from usuarios.models import Usuario
 from django.contrib import messages
 
-
+def devolucion(request):
+    devoluciones= Devolucion.objects.all()
+    form= DevolucionForm()
+    context={
+        'form':form,
+        'devoluciones':devoluciones,
+    }
+    return render(request,'facturas/devoluciones.html',context)
 def factura(request, modal_status='hid'):
     titulo="Facturas"
     facturas= Factura.objects.filter(estado='1')

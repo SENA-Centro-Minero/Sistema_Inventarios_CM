@@ -6,7 +6,7 @@ from usuarios.models import Usuario,Empresa
 from django.contrib import messages
 
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.hashers import make_password
 from usuarios.models import Departamento,Municipio
 # Create your views here.
@@ -33,6 +33,10 @@ def usuarios_crear(request):
                 user.email= request.POST['email']
                 user.password=make_password("@" + request.POST['nombres'][0] + request.POST['apellidos'][0] + request.POST['documento'][-4:])
                 user.save()
+                user_group = User
+                my_group= Group.objects.get(name='Normal')
+                usuario.user.groups.clear()
+                my_group.user_set.add(usuario.user)
             else:
                 user=User.objects.get(username=request.POST['documento'])
 
@@ -96,6 +100,8 @@ def usuarios_eliminar(request, pk):
     }
     return render(request,'usuarios/usuarios.html',context)
 
+@login_required
+@permission_required('usuarios.view_empresa')
 def empresas(request, modal_status='hid'):
     titulo="Empresas"
     empresas= Empresa.objects.filter(estado='1')

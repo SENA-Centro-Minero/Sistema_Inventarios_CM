@@ -1,32 +1,7 @@
+{% extends 'partials/body-login.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
-    <title>Sistema de Inventario - SENA</title>
-</head>
-<style>
-    input,
-    select {
-        width: 85%
-    }
-</style>
-
+{% block cuerpo %}
 <body class="login-page" style="min-height: 466px;">
     <div class="login-box">
 
@@ -77,7 +52,7 @@
 
 
                 <p class="mb-1">
-                    <a href="forgot-password.html">Olvidé mi contraseña</a>
+                    <a href="{% url 'pass_reset' %}">Olvidé mi contraseña</a>
                 </p>
 
             </div>
@@ -100,5 +75,6 @@
     </div>
     {% include 'partials/js.html' %}
 </body>
+{% endblock cuerpo %}
+    
 
-</html>

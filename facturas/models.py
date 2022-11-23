@@ -51,7 +51,7 @@ class FacturaDetalleVenta(models.Model):
     estado=models.CharField(max_length=1, choices=Estado.choices, default=Estado.ACTIVO, verbose_name="Estado")
 
 class Devolucion(models.Model):
-    fechaDevolucion=models.DateField(verbose_name="Fecha Devolución", help_text=u"MM/DD/AAAA")
+    fechaDevolucion=models.DateField(auto_now=True,verbose_name="Fecha Devolución")
     observaciones=models.TextField(max_length=200, verbose_name="Observaciones")
     usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
     monto=models.BigIntegerField(validators=[MinValueValidator(0)], verbose_name="Monto")
