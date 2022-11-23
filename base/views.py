@@ -4,11 +4,32 @@ from usuarios.models import Municipio, Departamento
 from usuarios.forms import DepartamentoForm,MunicipioForm
 from django.contrib import messages
 from django.contrib.auth import logout
+from productos.models import Producto
+from usuarios.models import Usuario
+from facturas.models import Factura, Devolucion
 
 def inicioAdmin(request):
     titulo="Tablero Principal"
+    cantidad_productos= Producto.objects.all().count()
+    cantidad_usuarios= Usuario.objects.all().count()
+    cantidad_facturas= Factura.objects.all().count()
+    cantidad_devoluciones= Devolucion.objects.all().count()
+
+    labels_stock=[]
+    data_stock=[]
+    productos= Producto.objects.all().order_by('stock')
+    for producto in productos:
+        labels_stock.append(producto.nombre)
+        data_stock.append(producto.stock)
+
     context={
-        'titulo':titulo
+        'titulo':titulo,
+        'cantidad_usuarios':cantidad_usuarios,
+        'cantidad_productos':cantidad_productos,
+        'cantidad_facturas':cantidad_facturas,
+        'cantidad_devoluciones':cantidad_devoluciones,
+        'labels_stock': labels_stock,
+        'data_stock':data_stock,
     }
     return render(request,'index-admin.html', context)
 

@@ -3,13 +3,18 @@ from django_select2 import forms as s2forms
 from productos.models import Producto
 from django_select2 import forms as s2forms
 
-from facturas.models import Factura, FacturaDetalleCompra, FacturaDetalleVenta
+from facturas.models import Factura, FacturaDetalleCompra, FacturaDetalleVenta, Devolucion
 
 class ProductoWidget(s2forms.ModelSelect2Widget):
     search_fields ={
         "nombre__icontains",
         "id__icontains"
     }
+class DevolucionForm(ModelForm):
+    class Meta:
+        model= Devolucion
+        exclude=['fechaDevolucion']
+       
 
 class FacturaForm(ModelForm):
     class Meta:
